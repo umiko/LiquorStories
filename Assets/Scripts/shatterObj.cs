@@ -8,37 +8,61 @@ public class shatterObj : MonoBehaviour
     public float breakForce;
     protected Rigidbody rigidbody;
     private int active = 0;
-    public float power;
     public float radius;
     public AnimationCurve expoPower;
+    public AudioSource audioSource;
 
     // Start is called before the first frame update
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
         //Debug.Log("BreakForce: " + breakForce + "\nPower: " + power + "\nRadius: " + radius);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (rigidbody.velocity.magnitude > breakForce && active == 0)
+        if (collision.gameObject.tag != "Shard")
         {
-            Debug.Log(gameObject.name + ": " + rigidbody.velocity.magnitude + " " + expoPower.Evaluate(rigidbody.velocity.magnitude));
-            //Debug.Log("ExPower: " + expoPower.Evaluate(rigidbody.velocity.magnitude));
-            active++;
-            GameObject instance = Instantiate(breakVersion, transform.position, transform.rotation);
-            Vector3 explosionPos = transform.position;
-            Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
-            foreach (Collider hit in colliders)
+            Debug.Log(gameObject.name + " velocity: " + rigidbody.velocity.magnitude + " relative: " + collision.relativeVelocity.magnitude);
+            //if (rigidbody.velocity.magnitude > breakForce && active == 0)
+            if (collision.relativeVelocity.magnitude > breakForce && active == 0)
             {
-                Rigidbody rb = hit.GetComponent<Rigidbody>();
-                if (rb != null)
+                //Debug.Log(gameObject.name + ": " + rigidbody.velocity.magnitude + " " + expoPower.Evaluate(rigidbody.velocity.magnitude));
+                //Debug.Log("ExPower: " + expoPower.Evaluate(rigidbody.velocity.magnitude));
+
+                active++;
+                if (audioSource)
                 {
-                    //rb.AddExplosionForce(power, explosionPos, radius, 0.0F, ForceMode.Impulse);
-                    rb.AddExplosionForce(expoPower.Evaluate(rigidbody.velocity.magnitude), explosionPos, radius, 0.0F, ForceMode.Impulse);
+                    audioSource.Play();
                 }
+
+                GameObject instance = Instantiate(breakVersion, transform.position, transform.rotation);
+                Vector3 explosionPos = transform.position;
+
+                Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
+                foreach (Collider hit in colliders)
+                {
+                    Rigidbody rb = hit.GetComponent<Rigidbody>();
+                    if (rb != null)
+                    {
+                        //rb.AddExplosionForce(power, explosionPos, radius, 0.0F, ForceMode.Impulse);
+                        Debug.Log("Power: " + expoPower.Evaluate(collision.relativeVelocity.magnitude));
+                        rb.AddExplosionForce(expoPower.Evaluate(collision.relativeVelocity.magnitude), explosionPos, radius, 0.0F, ForceMode.Impulse);
+                    }
+                }
+
+                //foreach (Transform child in instance.transform)
+                //{
+                //    //Debug.Log(child.gameObject.name);
+                //    Rigidbody rb = child.GetComponent<Rigidbody>();
+                //    if (rb != null)
+                //    {
+                //        rb.AddExplosionForce(expoPower.Evaluate(rigidbody.velocity.magnitude), explosionPos, radius, 0.0F, ForceMode.Impulse);
+                //    }
+                //}
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
         }
     }
 }
