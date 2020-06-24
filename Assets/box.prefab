@@ -125,39 +125,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   breakVersion: {fileID: 4543636549478325066, guid: 4bdbfdd60db1b9649b3934557cd5e999,
     type: 3}
-  breakForce: 0.42
-  power: 4
-  radius: 0.3
+  breakForce: 5
+  radius: 0.5
   expoPower:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2.430054
-      outSlope: 2.430054
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.42501324
-      value: 1.0328051
-      inSlope: 2.5101311
-      outSlope: 2.5101311
+      time: 0.020309448
+      value: 0.41244507
+      inSlope: 0.15484041
+      outSlope: 0.15484041
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 2.5221405
-      inSlope: 2.5902083
-      outSlope: 2.5902083
+      time: 17.023417
+      value: 3.0452132
+      inSlope: 0.15484041
+      outSlope: 0.15484041
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  clip: {fileID: 8300000, guid: 9a5d2e16f85df7e46a5789cf19d954c9, type: 3}
+  volume: 1

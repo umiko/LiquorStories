@@ -10,14 +10,13 @@ public class shatterObj : MonoBehaviour
     private int active = 0;
     public float radius;
     public AnimationCurve expoPower;
-    public AudioSource audioSource;
+    public AudioClip clip;
+    public float volume = 0.5f;
 
     // Start is called before the first frame update
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
-        audioSource = GetComponent<AudioSource>();
-        //Debug.Log("BreakForce: " + breakForce + "\nPower: " + power + "\nRadius: " + radius);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -32,11 +31,8 @@ public class shatterObj : MonoBehaviour
                 //Debug.Log("ExPower: " + expoPower.Evaluate(rigidbody.velocity.magnitude));
 
                 active++;
-                if (audioSource)
-                {
-                    audioSource.Play();
-                }
 
+                AudioSource.PlayClipAtPoint(clip, transform.position, volume);
                 GameObject instance = Instantiate(breakVersion, transform.position, transform.rotation);
                 Vector3 explosionPos = transform.position;
 
@@ -47,7 +43,7 @@ public class shatterObj : MonoBehaviour
                     if (rb != null)
                     {
                         //rb.AddExplosionForce(power, explosionPos, radius, 0.0F, ForceMode.Impulse);
-                        Debug.Log("Power: " + expoPower.Evaluate(collision.relativeVelocity.magnitude));
+                        //Debug.Log("Power: " + expoPower.Evaluate(collision.relativeVelocity.magnitude));
                         rb.AddExplosionForce(expoPower.Evaluate(collision.relativeVelocity.magnitude), explosionPos, radius, 0.0F, ForceMode.Impulse);
                     }
                 }
