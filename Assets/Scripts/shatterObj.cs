@@ -34,6 +34,7 @@ public class shatterObj : MonoBehaviour
 
                 AudioSource.PlayClipAtPoint(clip, transform.position, volume);
                 GameObject instance = Instantiate(breakVersion, transform.position, transform.rotation);
+                instance.transform.localScale = transform.localScale;
                 Vector3 explosionPos = transform.position;
 
                 Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
