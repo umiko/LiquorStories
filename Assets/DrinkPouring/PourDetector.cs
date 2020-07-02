@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class PourDetector : MonoBehaviour
 {
+    public int volume = 1000; //ml
+    public bool isEmpty = false;
+    private Coroutine volumeControll = null;
+
     public int pourThreshold = 45;
     public Transform origin = null;
     public GameObject streamPrefab = null;
@@ -18,19 +22,22 @@ public class PourDetector : MonoBehaviour
 
     private void Update()
     {
-        bool pourCheck = CalculatePourAngle() < pourThreshold;
-
-        if (isPouring != pourCheck)
+        if (!isEmpty)
         {
-            isPouring = pourCheck;
+            bool pourCheck = CalculatePourAngle() < pourThreshold;
 
-            if (isPouring)
+            if (isPouring != pourCheck)
             {
-                StartPour();
-            }
-            else
-            {
-                EndPour();
+                isPouring = pourCheck;
+
+                if (isPouring)
+                {
+                    StartPour();
+                }
+                else
+                {
+                    EndPour();
+                }
             }
         }
     }
@@ -40,11 +47,13 @@ public class PourDetector : MonoBehaviour
         print("Start");
         currentSteam = CreateStream();
         currentSteam.Begin();
+        volumeControll = StartCoroutine(VolumeControll());
     }
 
     private void EndPour()
     {
         print("End");
+        StopCoroutine(volumeControll);
         currentSteam.End();
         currentSteam = null;
     }
@@ -58,5 +67,23 @@ public class PourDetector : MonoBehaviour
     {
         GameObject streamObject = Instantiate(streamPrefab, origin.position, Quaternion.identity, transform);
         return streamObject.GetComponent<Stream>();
+    }
+
+    private IEnumerator VolumeControll()
+    {
+        while (gameObject.activeSelf && !isEmpty)
+        {
+            if (volume <= 0)
+            {
+                isEmpty = true;
+                EndPour();
+            }
+            else
+            {
+                volume--;
+            }
+
+            yield return null;
+        }
     }
 }
