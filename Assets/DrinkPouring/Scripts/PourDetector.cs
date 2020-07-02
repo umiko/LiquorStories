@@ -7,6 +7,7 @@ public class PourDetector : MonoBehaviour
 {
     public int volume = 1000; //ml
     public bool isEmpty = false;
+    public AnimationCurve pourAngleCurve; //Curve to adjust the pourThreshold
     private Coroutine volumeControll = null;
 
     public int pourThreshold = 45;
@@ -24,6 +25,7 @@ public class PourDetector : MonoBehaviour
     {
         if (!isEmpty)
         {
+            pourThreshold = (int)pourAngleCurve.Evaluate((volume / 10));
             bool pourCheck = CalculatePourAngle() < pourThreshold;
 
             if (isPouring != pourCheck)

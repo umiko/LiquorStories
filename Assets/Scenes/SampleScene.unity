@@ -490,15 +490,90 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6099013611025030997, guid: c5028c6f880d735438650f0bd7a11410,
+        type: 3}
+      propertyPath: pourAngleCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099013611025030997, guid: c5028c6f880d735438650f0bd7a11410,
+        type: 3}
+      propertyPath: pourAngleCurve.m_Curve.Array.data[0].value
+      value: 120.995224
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099013611025030997, guid: c5028c6f880d735438650f0bd7a11410,
+        type: 3}
+      propertyPath: pourAngleCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099013611025030997, guid: c5028c6f880d735438650f0bd7a11410,
+        type: 3}
+      propertyPath: pourAngleCurve.m_Curve.Array.data[1].time
+      value: 100.15341
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099013611025030997, guid: c5028c6f880d735438650f0bd7a11410,
+        type: 3}
+      propertyPath: pourAngleCurve.m_Curve.Array.data[1].value
+      value: 45.01384
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099013611025030997, guid: c5028c6f880d735438650f0bd7a11410,
+        type: 3}
+      propertyPath: pourAngleCurve.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099013611025030997, guid: c5028c6f880d735438650f0bd7a11410,
+        type: 3}
+      propertyPath: pourAngleCurve.m_PreInfinity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099013611025030997, guid: c5028c6f880d735438650f0bd7a11410,
+        type: 3}
+      propertyPath: pourAngleCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099013611025030997, guid: c5028c6f880d735438650f0bd7a11410,
+        type: 3}
+      propertyPath: pourAngleCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099013611025030997, guid: c5028c6f880d735438650f0bd7a11410,
+        type: 3}
+      propertyPath: pourAngleCurve.m_Curve.Array.data[0].inSlope
+      value: -0.75865
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099013611025030997, guid: c5028c6f880d735438650f0bd7a11410,
+        type: 3}
+      propertyPath: pourAngleCurve.m_Curve.Array.data[0].outSlope
+      value: -0.75865
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099013611025030997, guid: c5028c6f880d735438650f0bd7a11410,
+        type: 3}
+      propertyPath: pourAngleCurve.m_Curve.Array.data[1].inSlope
+      value: -0.75865
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099013611025030997, guid: c5028c6f880d735438650f0bd7a11410,
+        type: 3}
+      propertyPath: pourAngleCurve.m_Curve.Array.data[1].outSlope
+      value: -0.75865
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099013611025030997, guid: c5028c6f880d735438650f0bd7a11410,
+        type: 3}
+      propertyPath: pourAngleCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099013611025030997, guid: c5028c6f880d735438650f0bd7a11410,
+        type: 3}
+      propertyPath: pourThreshold
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 8379302477304017032, guid: c5028c6f880d735438650f0bd7a11410,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: -0.028079
       objectReference: {fileID: 0}
     - target: {fileID: 8379302477304017032, guid: c5028c6f880d735438650f0bd7a11410,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 1.4765645
       objectReference: {fileID: 0}
     - target: {fileID: 8379302477304017032, guid: c5028c6f880d735438650f0bd7a11410,
         type: 3}
@@ -508,7 +583,7 @@ PrefabInstance:
     - target: {fileID: 8379302477304017032, guid: c5028c6f880d735438650f0bd7a11410,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.000000021855694
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8379302477304017032, guid: c5028c6f880d735438650f0bd7a11410,
         type: 3}
@@ -518,7 +593,7 @@ PrefabInstance:
     - target: {fileID: 8379302477304017032, guid: c5028c6f880d735438650f0bd7a11410,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8379302477304017032, guid: c5028c6f880d735438650f0bd7a11410,
         type: 3}
