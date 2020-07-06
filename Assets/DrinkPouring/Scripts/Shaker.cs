@@ -1,13 +1,21 @@
-﻿using System;
+﻿using TMPro;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using UnityEngine;
+using UnityEngine.UIElements;
+
+//using UnityEngine.UI;
 
 public class Shaker : MonoBehaviour
 {
     private Dictionary<Ingredient, int> ingrediens;
-    //private LiquorLibrary liquorLibrary;
+
+    public GameObject txtTemp = null;
+    public GameObject content = null;
+    public GameObject txtDrinkName = null;
+    private List<GameObject> ingredients_txt = new List<GameObject>();
 
     private void Start()
     {
@@ -26,6 +34,36 @@ public class Shaker : MonoBehaviour
         addIngredient(new LiquidIngredient(LiquidType.Cachaca), 50);
 
         mixDrink();
+
+        //AddUItext("adawd");
+        //AddUItext("adwad");
+        //AddUItext("adhghhwerr");
+    }
+
+    public void AddUItext(Ingredient ingredient, int quantity)
+    {
+        GameObject tmp = Instantiate(txtTemp, content.transform.position, content.transform.rotation);
+        tmp.name = ingredient.Type.ToString();
+        tmp.transform.SetParent(content.transform);
+        tmp.GetComponent<TMP_Text>().text = ingredient.Type.ToString() + "\t\t" + quantity;
+        tmp.GetComponent<TMP_Text>().text += ingredient is LiquidIngredient ? "ml" : "st";
+
+        tmp.GetComponent<RectTransform>().localScale = Vector3.one;
+
+        ingredients_txt.Add(tmp);
+    }
+
+    public void UpdateUItext(Ingredient ingredient)
+    {
+        foreach (GameObject child in ingredients_txt)
+        {
+            if (child.name == ingredient.Type.ToString())
+            {
+                print("jo");
+                child.GetComponent<TMP_Text>().text = ingredient.Type + "\t\t" + ingrediens[ingredient];
+                child.GetComponent<TMP_Text>().text += ingredient is LiquidIngredient ? "ml" : "st";
+            }
+        }
     }
 
     public void addIngredient(Ingredient ingredient, int quantity)
@@ -35,10 +73,12 @@ public class Shaker : MonoBehaviour
         if (ingrediens.TryGetValue(ingredient, out value)) // Fügt einem gespeicherten Ingredient etwas hinzu oder legt es an
         {
             ingrediens[ingredient] += quantity;
+            UpdateUItext(ingredient);
         }
         else
         {
             ingrediens.Add(ingredient, quantity);
+            AddUItext(ingredient, quantity);
         }
 
         Debug.Log(ingredient.Type + ": " + ingrediens[ingredient]);
@@ -61,6 +101,9 @@ public class Shaker : MonoBehaviour
         {
             Debug.Log("Failure: " + drinkType);
         }
+
+        // Update UI
+        txtDrinkName.GetComponent<TMP_Text>().text = "Drink: " + drinkType.ToString();
 
         //return new Drink();
     }
