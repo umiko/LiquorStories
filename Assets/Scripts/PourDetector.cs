@@ -17,6 +17,8 @@ public class PourDetector : MonoBehaviour
     private bool isPouring = false;
     private Stream currentSteam = null;
 
+    public ParticleSystem particleSystem;
+
     private void Start()
     {
     }
@@ -47,8 +49,9 @@ public class PourDetector : MonoBehaviour
     private void StartPour()
     {
         print("Start");
-        currentSteam = CreateStream();
-        currentSteam.Begin();
+        //currentSteam = CreateStream();
+        //currentSteam.Begin();
+        particleSystem.Play();
         volumeControll = StartCoroutine(VolumeControll());
     }
 
@@ -56,8 +59,9 @@ public class PourDetector : MonoBehaviour
     {
         print("End");
         StopCoroutine(volumeControll);
-        currentSteam.End();
-        currentSteam = null;
+        particleSystem.Stop();
+        //currentSteam.End();
+        //currentSteam = null;
     }
 
     private float CalculatePourAngle()
