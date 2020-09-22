@@ -19,6 +19,9 @@ public class PourDetector : MonoBehaviour
 
     public ParticleSystem particleSystem;
 
+    [SerializeField]
+    public LiquidType liqourType;
+
     private void Start()
     {
     }
