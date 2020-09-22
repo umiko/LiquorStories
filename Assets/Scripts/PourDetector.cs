@@ -18,12 +18,17 @@ public class PourDetector : MonoBehaviour
     private Stream currentSteam = null;
 
     public ParticleSystem particleSystem;
-
-    [SerializeField]
     public LiquidType liqourType;
+    public List<ParticleCollisionEvent> collisionEvents;
 
-    private void Start()
+    private void Awake()
     {
+        particleSystem = GetComponent<ParticleSystem>();
+        collisionEvents = new List<ParticleCollisionEvent>();
+
+        //var customData = particleSystem.customData;
+        //customData.enabled = true;
+        //customData.SetMode(ParticleSystemCustomData.Custom1, ParticleSystemCustomDataMode.Vector);
     }
 
     private void Update()
@@ -93,6 +98,34 @@ public class PourDetector : MonoBehaviour
             }
 
             yield return null;
+        }
+    }
+
+    public void UpdateLiqourType(LiquidType liqourType)
+    {
+        this.liqourType = liqourType;
+
+        var customData = particleSystem.customData;
+        customData.enabled = true;
+        customData.SetMode(ParticleSystemCustomData.Custom1, ParticleSystemCustomDataMode.Vector);
+        customData.SetVectorComponentCount(ParticleSystemCustomData.Custom1, 1);
+        customData.SetVector(ParticleSystemCustomData.Custom1, 0, (int)liqourType);
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        int numCollisionEvents = particleSystem.GetCollisionEvents(other, collisionEvents);
+        int i = 0;
+
+        while (i < numCollisionEvents)
+        {
+            Debug.Log("Particle Collision: " + other.name);
+            if (other.name == "Nozzle")
+            {
+                Shaker shaker = other.GetComponentInParent<Shaker>();
+                shaker.addIngredient(new LiquidIngredient(liqourType), 1);
+            }
+            i++;
         }
     }
 }

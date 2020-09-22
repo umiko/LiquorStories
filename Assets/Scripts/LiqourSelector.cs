@@ -33,7 +33,8 @@ public class LiqourSelector : Editor
         if (PourDetector.liqourType != (LiquidType)liqourIndex)
         {
             // Update the selected choice in the underlying object
-            PourDetector.liqourType = (LiquidType)liqourIndex;
+            //PourDetector.liqourType = (LiquidType)liqourIndex;
+            PourDetector.UpdateLiqourType((LiquidType)liqourIndex);
             Debug.Log("set " + (LiquidType)liqourIndex);
             // Save the changes back to the object
             EditorUtility.SetDirty(target);
