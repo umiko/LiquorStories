@@ -4,27 +4,25 @@ using System.Collections.Generic;
 using EzySlice;
 using UnityEngine;
 
+[RequireComponent(typeof(SliceCooldown))]
 public class Slicable : MonoBehaviour
 {
     public Material mat;
     public int Pieces = 4;
-
+    
     private GameObject[] slicedObjects;
-    // Start is called before the first frame update
+    
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log("I AM COLLIDING");
-
         if (!SliceRegistry.IsSlicer(other.transform))
         {
             return;
         }
-        Debug.Log("I AM BEING SLICED");
+        //This works only for the knife! If something is not cutting correctly and you arent using the knife prefab to cut, this is probably where the issue is at
         if (!(other.GetContact(0).thisCollider.gameObject.CompareTag("Sharp") || other.GetContact(0).otherCollider.gameObject.CompareTag("Sharp")))
         {
             return;
         }
-        Debug.Log("WITH A KNIFE");
 
         if (Pieces < 1)
         {
@@ -32,12 +30,14 @@ public class Slicable : MonoBehaviour
         }
 
         slicedObjects = this.gameObject.SliceInstantiate(other.transform.position, other.transform.forward, mat);
-        Debug.Log(slicedObjects);
-        AddRigidBodyAndExplosions(slicedObjects);
-        gameObject.SetActive(false);
+        if (slicedObjects != null)
+        {
+            AddRigidBodyAndExplosions();
+            gameObject.SetActive(false);
+        }
     }
     
-    private void AddRigidBodyAndExplosions(GameObject[] slicedObjects)
+    private void AddRigidBodyAndExplosions()
     {
         foreach(GameObject obj in slicedObjects)
         {
@@ -45,9 +45,11 @@ public class Slicable : MonoBehaviour
             rb.interpolation = RigidbodyInterpolation.Interpolate;
             MeshCollider col = obj.AddComponent<MeshCollider>();
             col.convex = true;
-            Slicable sli = obj.AddComponent<Slicable>();
+            //SliceCooldown sc = obj.AddComponent<SliceCooldown>();
+            SliceCooldown sli = obj.AddComponent<SliceCooldown>();
             sli.Pieces = Pieces - 1;
             sli.mat = mat;
+            
             rb.AddExplosionForce(10, transform.position, 3);
         }
     }
