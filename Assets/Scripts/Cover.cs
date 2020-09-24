@@ -11,6 +11,7 @@ public class Cover : MonoBehaviour
     private Transform coverHolder;
     private MeshCollider nozzleCollider;
     private Rigidbody rigidbody;
+    private Transform followTransform;
 
     [SerializeField]
     private bool isInHand = false;
@@ -28,7 +29,7 @@ public class Cover : MonoBehaviour
             Debug.Log("set isAttached");
             isAttached = value;
             // disable collision detection for the cover while attached to the shaker
-            rigidbody.detectCollisions = value ? false : true;
+            //rigidbody.detectCollisions = value ? false : true;
 
             if (value)
             {
@@ -127,6 +128,16 @@ public class Cover : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (isAttached && !isInHand)
+        {
+            Vector3 position = coverHolder.position;
+            transform.position = position + coverHolder.transform.rotation * new Vector3(0f, transform.lossyScale.y, 0f);
+            transform.rotation = coverHolder.rotation;
+        }
+    }
+
     private void attachCover()
     {
         //Debug.Log("attachCover");
@@ -135,7 +146,6 @@ public class Cover : MonoBehaviour
 
         transform.position = new Vector3(position.x, position.y + transform.lossyScale.y, position.z);
         transform.rotation = coverHolder.rotation;
-        gameObject.transform.SetParent(coverHolder.parent);
 
         shaker.isCoverAttached = true;
     }
@@ -143,7 +153,6 @@ public class Cover : MonoBehaviour
     private void removeCover()
     {
         //Debug.Log("removeCover");
-        gameObject.transform.SetParent(null);
         shaker.isCoverAttached = false;
         transform.position = new Vector3(transform.position.x, transform.position.y + (transform.lossyScale.y * 1.2f), transform.position.z);
         nozzleCollider.enabled = true;
