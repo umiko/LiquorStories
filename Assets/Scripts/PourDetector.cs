@@ -20,15 +20,17 @@ public class PourDetector : MonoBehaviour
     public ParticleSystem particleSystem;
     public LiquidType liqourType;
     public List<ParticleCollisionEvent> collisionEvents;
+    private Shaker shaker;
+    private MeshCollider nozzleColider;
 
     private void Awake()
     {
         particleSystem = GetComponent<ParticleSystem>();
         collisionEvents = new List<ParticleCollisionEvent>();
 
-        //var customData = particleSystem.customData;
-        //customData.enabled = true;
-        //customData.SetMode(ParticleSystemCustomData.Custom1, ParticleSystemCustomDataMode.Vector);
+        GameObject shakerOBJ = GameObject.Find("Shaker");
+        shaker = shakerOBJ.GetComponent<Shaker>();
+        nozzleColider = shakerOBJ.transform.Find("Nozzle").GetComponent<MeshCollider>();
     }
 
     private void Update()
@@ -101,16 +103,16 @@ public class PourDetector : MonoBehaviour
         }
     }
 
-    public void UpdateLiqourType(LiquidType liqourType)
-    {
-        this.liqourType = liqourType;
+    //public void UpdateLiqourType(LiquidType liqourType)
+    //{
+    //    this.liqourType = liqourType;
 
-        var customData = particleSystem.customData;
-        customData.enabled = true;
-        customData.SetMode(ParticleSystemCustomData.Custom1, ParticleSystemCustomDataMode.Vector);
-        customData.SetVectorComponentCount(ParticleSystemCustomData.Custom1, 1);
-        customData.SetVector(ParticleSystemCustomData.Custom1, 0, (int)liqourType);
-    }
+    //    var customData = particleSystem.customData;
+    //    customData.enabled = true;
+    //    customData.SetMode(ParticleSystemCustomData.Custom1, ParticleSystemCustomDataMode.Vector);
+    //    customData.SetVectorComponentCount(ParticleSystemCustomData.Custom1, 1);
+    //    customData.SetVector(ParticleSystemCustomData.Custom1, 0, (int)liqourType);
+    //}
 
     private void OnParticleCollision(GameObject other)
     {
@@ -119,13 +121,38 @@ public class PourDetector : MonoBehaviour
 
         while (i < numCollisionEvents)
         {
-            Debug.Log("Particle Collision: " + other.name);
-            if (other.name == "Nozzle")
+            //Debug.Log("Particle Collision: " + other.name);
+            //Debug.Log("Coll Event " + collisionEvents[i].colliderComponent.name);
+            if (collisionEvents[i].colliderComponent.name == "Nozzle")
             {
-                Shaker shaker = other.GetComponentInParent<Shaker>();
+                Debug.Log("Attached OBJ " + other.name);
+                //Shaker shaker = other.GetComponentInParent<Shaker>();
                 shaker.addIngredient(new LiquidIngredient(liqourType), 1);
             }
             i++;
         }
     }
+
+    //private void OnParticleTrigger()
+    //{
+    //    List<ParticleSystem.Particle> enteredParticles = new List<ParticleSystem.Particle>();
+    //    // get
+    //    int numEnter = particleSystem.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enteredParticles);
+    //    // iterate
+
+    //    foreach (ParticleSystem.Particle particle in enteredParticles)
+    //    {
+    //        if (nozzleColider.bounds.Contains(particle.position))
+    //        {
+    //            Debug.Log("Particle collision mit nozzle");
+    //        }
+    //        else
+    //        {
+    //            Debug.Log("Particle collision mit was anderem");
+    //        }
+    //        // shaker.addIngredient(new LiquidIngredient(liqourType), 1);
+    //    }
+
+    //    ParticlePhysicsExtensions.GetTriggerParticles(particleSystem, ParticleSystemTriggerEventType.Enter, enteredParticles);
+    //}
 }

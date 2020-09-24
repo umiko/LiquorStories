@@ -21,8 +21,12 @@ public class Shaker : MonoBehaviour
     public RectTransform toolTipPanel;
     private Camera mainCamera;
 
+    public bool isCoverAttached;
+    private Rigidbody rb;
+
     private void Start()
     {
+        rb = GetComponent<Rigidbody>();
         mainCamera = Camera.main;
         //liquorLibrary = new LiquorLibrary();
         IngredientComparer<Ingredient> ingredientComparer = new IngredientComparer<Ingredient>();
@@ -128,5 +132,20 @@ public class Shaker : MonoBehaviour
     private void Update()
     {
         shakerUI.transform.rotation = mainCamera.transform.rotation;
+        shakeDetection();
+    }
+
+    private void shakeDetection()
+    {
+        if (isCoverAttached)
+        {
+            if (rb.velocity.magnitude != 0)
+                Debug.Log("Shaker velocity" + rb.velocity.magnitude);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.name);
     }
 }
