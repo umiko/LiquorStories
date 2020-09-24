@@ -58,7 +58,7 @@ public class PourDetector : MonoBehaviour
 
     private void StartPour()
     {
-        print("Start");
+        //print("Start");
         //currentSteam = CreateStream();
         //currentSteam.Begin();
         particleSystem.Play();
@@ -67,7 +67,7 @@ public class PourDetector : MonoBehaviour
 
     private void EndPour()
     {
-        print("End");
+        //print("End");
         StopCoroutine(volumeControll);
         particleSystem.Stop();
         //currentSteam.End();
@@ -79,11 +79,11 @@ public class PourDetector : MonoBehaviour
         return transform.up.y * Mathf.Rad2Deg;
     }
 
-    private Stream CreateStream()
-    {
-        GameObject streamObject = Instantiate(streamPrefab, origin.position, Quaternion.identity, transform);
-        return streamObject.GetComponent<Stream>();
-    }
+    //private Stream CreateStream()
+    //{
+    //    GameObject streamObject = Instantiate(streamPrefab, origin.position, Quaternion.identity, transform);
+    //    return streamObject.GetComponent<Stream>();
+    //}
 
     private IEnumerator VolumeControll()
     {

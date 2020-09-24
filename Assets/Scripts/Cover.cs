@@ -1,10 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class Cover : MonoBehaviour
 {
+    private GameObject shakerOBJ;
+    private Shaker shaker;
     private Transform coverHolder;
+    private MeshCollider nozzleCollider;
+    private Rigidbody rigidbody;
 
     [SerializeField]
     private bool isInHand = false;
@@ -14,12 +20,42 @@ public class Cover : MonoBehaviour
     [SerializeField]
     private bool isAttached = false; //is the cover attached to the shaker
 
-    private MeshCollider nozzleCollider;
+    public bool IsAttached
+    {
+        get { return isAttached; }
+        set
+        {
+            Debug.Log("set isAttached");
+            isAttached = value;
+            // disable collision detection for the cover while attached to the shaker
+            rigidbody.detectCollisions = value ? false : true;
+
+            if (value)
+            {
+                attachCover();
+            }
+            else
+            {
+                removeCover();
+            }
+        }
+    }
 
     private void Awake()
     {
-        nozzleCollider = GameObject.Find("Nozzle").GetComponent<MeshCollider>();
+        shakerOBJ = GameObject.Find("Shaker");
+        shaker = shakerOBJ.GetComponent<Shaker>();
+        coverHolder = shakerOBJ.transform.Find("CoverHolder").transform;
+        nozzleCollider = shakerOBJ.transform.Find("Nozzle").GetComponent<MeshCollider>();
+
+        rigidbody = GetComponent<Rigidbody>();
     }
+
+    //private void OnValidate()
+    //{
+    //    if (Application.isPlaying)
+    //        IsAttached = isAttached;
+    //}
 
     //private void OnCollisionStay(Collision collision)
     //{
@@ -58,36 +94,58 @@ public class Cover : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         //print(other.name);
-        if (!isInHand && !isAttached)
+        if (!IsInHand && !IsAttached)
         {
             if (other.name == "CoverHolder")
             {
-                // disable collider on nozzle  to prevent collision with the cover
-                nozzleCollider.enabled = false;
+                //// disable collider on nozzle  to prevent collision with the cover
+                //nozzleCollider.enabled = false;
 
-                coverHolder = other.transform;
-                Vector3 position = coverHolder.position;
+                //coverHolder = other.transform;
+                //Vector3 position = coverHolder.position;
 
-                transform.position = new Vector3(position.x, position.y + transform.lossyScale.y, position.z);
-                transform.rotation = coverHolder.rotation;
-                gameObject.transform.SetParent(coverHolder.parent);
+                //transform.position = new Vector3(position.x, position.y + transform.lossyScale.y, position.z);
+                //transform.rotation = coverHolder.rotation;
+                //gameObject.transform.SetParent(coverHolder.parent);
 
-                isAttached = true;
-                // notify shaker
-                Shaker shaker = coverHolder.GetComponentInParent<Shaker>();
-                shaker.isCoverAttached = true;
+                IsAttached = true;
+                //// notify shaker
+                //Shaker shaker = coverHolder.GetComponentInParent<Shaker>();
+                //shaker.isCoverAttached = true;
             }
         }
-        else if (isInHand && isAttached)
+        else if (IsInHand && IsAttached)
         {
-            gameObject.transform.SetParent(null);
-            isAttached = false;
-            // notify shaker
-            Shaker shaker = coverHolder.GetComponentInParent<Shaker>();
-            shaker.isCoverAttached = false;
+            //    gameObject.transform.SetParent(null);
+            IsAttached = false;
+            //// notify shaker
+            //Shaker shaker = coverHolder.GetComponentInParent<Shaker>();
+            //shaker.isCoverAttached = false;
 
-            transform.position = new Vector3(transform.position.x, transform.position.y + (transform.lossyScale.y * 1.2f), transform.position.z);
-            nozzleCollider.enabled = true;
+            //transform.position = new Vector3(transform.position.x, transform.position.y + (transform.lossyScale.y * 1.2f), transform.position.z);
+            //nozzleCollider.enabled = true;
         }
+    }
+
+    private void attachCover()
+    {
+        //Debug.Log("attachCover");
+        nozzleCollider.enabled = false;
+        Vector3 position = coverHolder.position;
+
+        transform.position = new Vector3(position.x, position.y + transform.lossyScale.y, position.z);
+        transform.rotation = coverHolder.rotation;
+        gameObject.transform.SetParent(coverHolder.parent);
+
+        shaker.isCoverAttached = true;
+    }
+
+    private void removeCover()
+    {
+        //Debug.Log("removeCover");
+        gameObject.transform.SetParent(null);
+        shaker.isCoverAttached = false;
+        transform.position = new Vector3(transform.position.x, transform.position.y + (transform.lossyScale.y * 1.2f), transform.position.z);
+        nozzleCollider.enabled = true;
     }
 }

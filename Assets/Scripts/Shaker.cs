@@ -36,13 +36,13 @@ public class Shaker : MonoBehaviour
         //Ingredient ice2 = new SolidIngredient(SolidType.Ice);
         //Ingredient water = new LiquidIngredient(LiquidType.Cola);
 
-        addIngredient(new SolidIngredient(SolidType.Ice), 1);
-        addIngredient(new SolidIngredient(SolidType.Lime), 1);
-        addIngredient(new SolidIngredient(SolidType.Sugar), 1);
-        addIngredient(new SolidIngredient(SolidType.Sugar), 1);
-        addIngredient(new LiquidIngredient(LiquidType.Cachaca), 50);
+        //addIngredient(new SolidIngredient(SolidType.Ice), 1);
+        //addIngredient(new SolidIngredient(SolidType.Lime), 1);
+        //addIngredient(new SolidIngredient(SolidType.Sugar), 1);
+        //addIngredient(new SolidIngredient(SolidType.Sugar), 1);
+        //addIngredient(new LiquidIngredient(LiquidType.Cachaca), 50);
 
-        mixDrink();
+        //mixDrink();
 
         //AddUItext("adawd");
         //AddUItext("adwad");
@@ -68,7 +68,7 @@ public class Shaker : MonoBehaviour
         {
             if (child.name == ingredient.Type.ToString())
             {
-                print("jo");
+                //print("jo");
                 child.GetComponent<TMP_Text>().text = ingredient.Type + "\t\t" + ingrediens[ingredient];
                 child.GetComponent<TMP_Text>().text += ingredient is LiquidIngredient ? "ml" : "st";
             }
@@ -139,13 +139,8 @@ public class Shaker : MonoBehaviour
     {
         if (isCoverAttached)
         {
-            if (rb.velocity.magnitude != 0)
-                Debug.Log("Shaker velocity" + rb.velocity.magnitude);
+            // if (rb.velocity.y != 0)
+            Debug.Log("Shaker velocity" + rb.velocity);
         }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log(other.name);
     }
 }
