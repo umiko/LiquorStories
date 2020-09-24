@@ -25,13 +25,13 @@ public class Slicable : MonoBehaviour
             return;
         }
         Debug.Log("WITH A KNIFE");
-        Transform otherTrans = other.transform;
-        Debug.Log(otherTrans.position);
-        Debug.Log(otherTrans.rotation.eulerAngles);
-        Debug.Log(mat);
 
-        
-        slicedObjects = this.gameObject.SliceInstantiate(otherTrans.position,otherTrans.forward, mat);
+        if (Pieces < 1)
+        {
+            return;
+        }
+
+        slicedObjects = this.gameObject.SliceInstantiate(other.transform.position, other.transform.forward, mat);
         Debug.Log(slicedObjects);
         AddRigidBodyAndExplosions(slicedObjects);
         gameObject.SetActive(false);
