@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using EzySlice;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 [RequireComponent(typeof(SliceCooldown))]
 public class Slicable : MonoBehaviour
@@ -34,6 +35,7 @@ public class Slicable : MonoBehaviour
         {
             AddRigidBodyAndExplosions();
             gameObject.SetActive(false);
+            Destroy(this);
         }
     }
     
