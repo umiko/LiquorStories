@@ -84,3 +84,17 @@ InitTestScene*.unity
 .history
 
 # End of https://www.toptal.com/developers/gitignore/api/unity,visualstudiocode
+
+.idea/.idea.LiquorStories/.idea/contentModel.xml
+
+.idea/.idea.LiquorStories/.idea/indexLayout.xml
+
+.idea/.idea.LiquorStories/.idea/modules.xml
+
+.idea/.idea.LiquorStories/.idea/projectSettingsUpdater.xml
+
+.idea/.idea.LiquorStories/.idea/vcs.xml
+
+.idea/.idea.LiquorStories/.idea/workspace.xml
+
+.idea/.idea.LiquorStories/riderModule.iml
