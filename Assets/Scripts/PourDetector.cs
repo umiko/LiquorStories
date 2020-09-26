@@ -23,6 +23,8 @@ public class PourDetector : MonoBehaviour
     private Shaker shaker;
     private MeshCollider nozzleColider;
 
+    public Color liquidColor;
+
     private void Awake()
     {
         particleSystem = GetComponent<ParticleSystem>();

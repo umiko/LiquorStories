@@ -49,9 +49,6 @@ public class Shaker : MonoBehaviour
         IngredientComparer<Ingredient> ingredientComparer = new IngredientComparer<Ingredient>();
         ingrediens = new Dictionary<Ingredient, int>(ingredientComparer);
         progressbar = shakerUI.gameObject.GetComponentInChildren<ProgressBar>();
-        //Ingredient ice = new SolidIngredient(SolidType.Ice);
-        //Ingredient ice2 = new SolidIngredient(SolidType.Ice);
-        //Ingredient water = new LiquidIngredient(LiquidType.Cola);
 
         addIngredient(new SolidIngredient(SolidType.Ice), 1);
         addIngredient(new SolidIngredient(SolidType.Lime), 1);

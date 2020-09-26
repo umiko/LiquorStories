@@ -6848,7 +6848,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 901457708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.678, y: 0.977, z: 0}
+  m_LocalPosition: {x: -0.678, y: 0.849, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22690816}
@@ -10090,6 +10090,26 @@ PrefabInstance:
     - target: {fileID: 6099013611025030997, guid: c5028c6f880d735438650f0bd7a11410,
         type: 3}
       propertyPath: liqourType
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099013611025030997, guid: c5028c6f880d735438650f0bd7a11410,
+        type: 3}
+      propertyPath: liquidColor.r
+      value: 243
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099013611025030997, guid: c5028c6f880d735438650f0bd7a11410,
+        type: 3}
+      propertyPath: liquidColor.g
+      value: 214
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099013611025030997, guid: c5028c6f880d735438650f0bd7a11410,
+        type: 3}
+      propertyPath: liquidColor.b
+      value: 79
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099013611025030997, guid: c5028c6f880d735438650f0bd7a11410,
+        type: 3}
+      propertyPath: liquidColor.a
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8379302477304017032, guid: c5028c6f880d735438650f0bd7a11410,
@@ -10155,7 +10175,7 @@ PrefabInstance:
     - target: {fileID: 9152039681128524338, guid: c5028c6f880d735438650f0bd7a11410,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5028c6f880d735438650f0bd7a11410, type: 3}
