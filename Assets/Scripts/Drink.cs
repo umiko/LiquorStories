@@ -4,20 +4,20 @@ using UnityEngine;
 
 public enum DrinkType
 {
-    Default,
-    RumAndCoke,
-    GinTonic,
-    FlyingHirsch,
-    TequilaSunrise,
-    Caipirinha,
-    Mojito,
-    LongIslandIcedTea,
-    Cosmopolitan,
-    PinaColada,
-    CubraLibre,
-    Magarita,
-    Daiquiri,
-    Manhatten
+    Default = 0,
+    RumAndCoke = 1,
+    GinTonic = 2,
+    FlyingHirsch = 3,
+    TequilaSunrise = 4,
+    Caipirinha = 5,
+    Mojito = 6,
+    LongIslandIcedTea = 7,
+    Cosmopolitan = 8,
+    PinaColada = 9,
+    CubraLibre = 10,
+    Magarita = 11,
+    Daiquiri = 12,
+    Manhatten = 13
 }
 
 public class Drink : DrinkComparer
