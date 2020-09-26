@@ -31,6 +31,16 @@ public class Shaker : MonoBehaviour
     private Drink drink;
     public Drink Drink { get; private set; }
 
+    [SerializeField]
+    private bool isInHand = false;
+
+    public bool IsInHand { get => isInHand; set => isInHand = value; }
+
+    [SerializeField]
+    private bool isDrinkMixed = false;
+
+    public bool IsDrinkMixed { get => isDrinkMixed; set => isDrinkMixed = value; }
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -49,7 +59,7 @@ public class Shaker : MonoBehaviour
         //addIngredient(new SolidIngredient(SolidType.Sugar), 1);
         addIngredient(new LiquidIngredient(LiquidType.Cachaca), 50);
 
-        mixDrink();
+        //mixDrink();
 
         //AddUItext("adawd");
         //AddUItext("adwad");
@@ -119,6 +129,7 @@ public class Shaker : MonoBehaviour
         {
             Debug.Log("Failure: " + drinkType);
         }
+        IsDrinkMixed = true;
     }
 
     //private void OnGUI()
@@ -149,7 +160,7 @@ public class Shaker : MonoBehaviour
             timeToWait -= currentTime;
         }
 
-        if (progressbar.IsComplete)
+        if (progressbar.IsComplete && !IsDrinkMixed)
         {
             mixDrink();
             progressbar.progressText.text = Drink.type.ToString();
@@ -172,5 +183,15 @@ public class Shaker : MonoBehaviour
             //Debug.Log("Shaker velocity" + rb.velocity.magnitude + "  Pr: " + progress);
             progressbar.IncrementProgress(progress);
         }
+    }
+
+    public void emptyShaker()
+    {
+        //reset stuff
+        IsDrinkMixed = false;
+        ingrediens.Clear();
+        Drink.type = DrinkType.Default;
+        progressbar.Reset();
+        //...
     }
 }

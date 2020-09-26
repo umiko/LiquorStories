@@ -24,7 +24,8 @@ public class ProgressBar : MonoBehaviour
     private void Start()
     {
         slider = GetComponent<Slider>();
-        progressText = FindObjectOfType<TextMeshProUGUI>();
+        //progressText = FindObjectOfType<TextMeshProUGUI>();
+        progressText = GetComponentInChildren<TextMeshProUGUI>();
         progressText.text = "Shake to mix";
     }
 
