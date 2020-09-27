@@ -75,6 +75,7 @@ public static class LiquidColour
         {LiquidType.Vermouth,       new Color( 18 , 118 , 10, 1 ) },
         {LiquidType.Angostura,      new Color( 241 , 250 , 206, 1 ) },
         {LiquidType.Cointreau,      new Color( 164 , 89 , 61, 1 ) },
+        {LiquidType.Whiskey,        new Color( 164 , 89 , 61, 1 ) },
     };
 
     public static Color getLiquidColor(LiquidType liquidType)

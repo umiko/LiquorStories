@@ -87,12 +87,12 @@ public class LiquorLibrary : MonoBehaviour
              Pairing.Of(LiquidType.SimpleSyrup, 15)
          );
 
-        addRecipe(DrinkType.Manhatten,
-            Pairing.Of(SolidType.Cherry, 1),
-            Pairing.Of(LiquidType.Whiskey, 40),
-            Pairing.Of(LiquidType.Vermouth, 20),
-            Pairing.Of(LiquidType.Angostura, 20)
-        );
+        //addRecipe(DrinkType.Manhatten,
+        //    Pairing.Of(SolidType.Cherry, 1),
+        //    Pairing.Of(LiquidType.Whiskey, 40),
+        //    Pairing.Of(LiquidType.Vermouth, 20),
+        //    Pairing.Of(LiquidType.Angostura, 20)
+        //);
 
         //print();
     }
@@ -172,7 +172,7 @@ public class LiquorLibrary : MonoBehaviour
         }
     }
 
-    public void print()
+    public static void print()
     {
         foreach (Drink drink in recipes)
         {

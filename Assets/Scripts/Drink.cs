@@ -16,8 +16,8 @@ public enum DrinkType
     PinaColada = 9,
     CubraLibre = 10,
     Magarita = 11,
-    Daiquiri = 12,
-    Manhatten = 13
+    Daiquiri = 12
+    //Manhatten = 13
 }
 
 public class Drink : DrinkComparer
@@ -26,6 +26,16 @@ public class Drink : DrinkComparer
 
     //public Dictionary<Ingredient, int> ingrediens;
     public IngredientDictionary<Ingredient, int> ingredienstDic;
+
+    public Drink(Drink drink)
+    {
+        type = drink.type;
+        ingredienstDic = drink.ingredienstDic;
+    }
+
+    public Drink()
+    {
+    }
 
     public Drink(DrinkType type, Dictionary<Ingredient, int> ingrediens)
     {
