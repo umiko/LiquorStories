@@ -17,6 +17,7 @@ public class PourDetector : MonoBehaviour
     public float fillAmountClampFull;
     public float fillAmountClampEmpty;
     private Material liquidMaterialReference;
+    private Renderer liquidRendererReference;
     
     private bool isPouring = false;
     private Stream currentSteam = null;
@@ -34,7 +35,8 @@ public class PourDetector : MonoBehaviour
     {
         particleSystem = GetComponent<ParticleSystem>();
         collisionEvents = new List<ParticleCollisionEvent>();
-        liquidMaterialReference = GetComponentInChildren<Wobble>().gameObject.GetComponent<Renderer>().material;
+        liquidRendererReference = GetComponentInChildren<Wobble>().gameObject.GetComponent<Renderer>();
+        liquidMaterialReference = liquidRendererReference.material;
         
         GameObject shakerOBJ = GameObject.Find("Shaker");
         shaker = shakerOBJ.GetComponent<Shaker>();
@@ -100,6 +102,7 @@ public class PourDetector : MonoBehaviour
             if (volume <= 0)
             {
                 isEmpty = true;
+                liquidRendererReference.enabled = false;
                 EndPour();
             }
             else
