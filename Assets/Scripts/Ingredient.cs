@@ -53,7 +53,7 @@ public static class LiquidColour
 {
     private static Dictionary<LiquidType, Color> liquidColors = new Dictionary<LiquidType, Color>
     {
-        {LiquidType.Cola,           new Color( .24f, .19f, .14f, 1 ) },
+        {LiquidType.Cola,           new Color( 60, 48, 36, 1 ) },
         {LiquidType.Rum,            new Color( 131 , 95 , 83, 1 ) },
         {LiquidType.Vodka,          new Color( 191 , 192 , 238, 1 ) },
         {LiquidType.Gin,            new Color( 217, 228, 201, 1 ) },
