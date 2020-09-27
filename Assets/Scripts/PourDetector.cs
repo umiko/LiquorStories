@@ -14,6 +14,11 @@ public class PourDetector : MonoBehaviour
     public Transform origin = null;
     public GameObject streamPrefab = null;
 
+    public float fillAmountClampFull;
+    public float fillAmountClampEmpty;
+    private Material liquidMaterialReference;
+    private Renderer liquidRendererReference;
+    
     private bool isPouring = false;
     private Stream currentSteam = null;
 
@@ -24,12 +29,15 @@ public class PourDetector : MonoBehaviour
     private MeshCollider nozzleColider;
 
     public Color liquidColor;
+    private static readonly int FillAmount = Shader.PropertyToID("_FillAmount");
 
     private void Awake()
     {
         particleSystem = GetComponent<ParticleSystem>();
         collisionEvents = new List<ParticleCollisionEvent>();
-
+        liquidRendererReference = GetComponentInChildren<Wobble>().gameObject.GetComponent<Renderer>();
+        liquidMaterialReference = liquidRendererReference.material;
+        
         GameObject shakerOBJ = GameObject.Find("Shaker");
         shaker = shakerOBJ.GetComponent<Shaker>();
         nozzleColider = shakerOBJ.transform.Find("Nozzle").GetComponent<MeshCollider>();
@@ -94,13 +102,14 @@ public class PourDetector : MonoBehaviour
             if (volume <= 0)
             {
                 isEmpty = true;
+                liquidRendererReference.enabled = false;
                 EndPour();
             }
             else
             {
                 volume--;
             }
-
+            liquidMaterialReference.SetFloat(FillAmount, Mathf.Lerp(fillAmountClampEmpty, fillAmountClampFull, volume/1000f));
             yield return null;
         }
     }
