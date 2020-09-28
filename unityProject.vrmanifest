@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.liquorstories.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "C:\\HS Fulda\\Semester 4\\VRundAR\\LiquorStories\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "action_manifest_path": "F:\\Projects\\LiquorStories\\Assets\\StreamingAssets\\SteamVR\\actions.json",
       "strings": {
         "en_us": {
           "name": "LiquorStories [Testing]"

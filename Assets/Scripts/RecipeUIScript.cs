@@ -9,7 +9,7 @@ public class RecipeUIScript : MonoBehaviour
     public RectTransform drinkHolder;
     public RectTransform drinRecipe;
 
-    private Button[] buttons;
+    private TextMeshProUGUI[] buttons;
     public TextMeshProUGUI drinkName;
     public TextMeshProUGUI drinkIngredients;
 
@@ -26,8 +26,8 @@ public class RecipeUIScript : MonoBehaviour
     private void Awake()
     {
         //Button[] buttons = transform.Find("DrinkHolder").GetComponentsInChildren<Button>();
-        buttons = new Button[8];
-        buttons = drinkHolder.GetComponentsInChildren<Button>(true);
+        buttons = new TextMeshProUGUI[8];
+        buttons = drinkHolder.GetComponentsInChildren<TextMeshProUGUI>(true);
         drink = new Drink();
         UpdateDrinks();
     }
@@ -40,8 +40,8 @@ public class RecipeUIScript : MonoBehaviour
             for (int i = 1; i <= 6; i++)
             {
                 //Debug.Log(i + " von " + buttons.Length);
-                DrinkType drinkType = isFirstPage ? (DrinkType)i : (DrinkType)(i * 2);
-                buttons[i - 1].GetComponentInChildren<TextMeshProUGUI>().text = drinkType.ToString();
+                DrinkType drinkType = isFirstPage ? (DrinkType)i : (DrinkType)(i +6);
+                buttons[i - 1].text = drinkType.ToString();
                 //Debug.Log(buttons[i - 1].transform.name + " " + drinkType.ToString());
             }
         }
@@ -54,7 +54,7 @@ public class RecipeUIScript : MonoBehaviour
         if (drinRecipe.gameObject.activeSelf)
         {
             //drink = new Drink(LiquorLibrary.getDrink(isFirstPage ? (DrinkType)index : (DrinkType)(index * 2)));
-            DrinkType drinkType = isFirstPage ? (DrinkType)index : (DrinkType)(index * 2);
+            DrinkType drinkType = isFirstPage ? (DrinkType)index : (DrinkType)(index +6);
             drink = LiquorLibrary.getDrink(drinkType);
             drinkName.text = drink.type.ToString();
             drinkIngredients.text = drink.ToString();
