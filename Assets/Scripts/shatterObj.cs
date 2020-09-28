@@ -35,13 +35,14 @@ public class shatterObj : MonoBehaviour
                 AudioSource.PlayClipAtPoint(clip, transform.position, volume);
                 GameObject instance = Instantiate(breakVersion, transform.position, transform.rotation);
                 instance.transform.localScale = transform.localScale;
+                
                 Vector3 explosionPos = transform.position;
 
                 Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
                 foreach (Collider hit in colliders)
                 {
                     Rigidbody rb = hit.GetComponent<Rigidbody>();
-                    if (rb != null)
+                    if (rb != null && hit.CompareTag("Shard"))
                     {
                         //rb.AddExplosionForce(power, explosionPos, radius, 0.0F, ForceMode.Impulse);
                         //Debug.Log("Power: " + expoPower.Evaluate(collision.relativeVelocity.magnitude));
