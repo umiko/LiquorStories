@@ -6,7 +6,6 @@ public class shatterObj : MonoBehaviour
 {
     public GameObject breakVersion;
     public float breakForce;
-    protected Rigidbody rigidbody;
     private int active = 0;
     public float radius;
     public AnimationCurve expoPower;
@@ -16,14 +15,13 @@ public class shatterObj : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag != "Shard")
         {
-            Debug.Log(gameObject.name + " velocity: " + rigidbody.velocity.magnitude + " relative: " + collision.relativeVelocity.magnitude);
+            //Debug.Log(gameObject.name + " velocity: " + rigidbody.velocity.magnitude + " relative: " + collision.relativeVelocity.magnitude);
             //if (rigidbody.velocity.magnitude > breakForce && active == 0)
             if (collision.relativeVelocity.magnitude > breakForce && active == 0)
             {
