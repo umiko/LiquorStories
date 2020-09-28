@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TreeEditor;
 using UnityEngine;
 
 public class PourDetector : MonoBehaviour
 {
+    public int maxVolume = 1000;
     public int volume = 1000; //ml
     public bool isEmpty = false;
     public AnimationCurve pourAngleCurve; //Curve to adjust the pourThreshold
@@ -111,6 +113,15 @@ public class PourDetector : MonoBehaviour
             }
             liquidMaterialReference.SetFloat(FillAmount, Mathf.Lerp(fillAmountClampEmpty, fillAmountClampFull, volume/1000f));
             yield return null;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag.Equals("Refill Area") && volume < maxVolume)
+        {
+            this.volume++;
+            liquidMaterialReference.SetFloat(FillAmount, Mathf.Lerp(fillAmountClampEmpty, fillAmountClampFull, volume/1000f));
         }
     }
 
