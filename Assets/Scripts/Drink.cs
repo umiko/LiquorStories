@@ -7,7 +7,10 @@ public enum DrinkType
     Default = 0,
     RumAndCoke = 1,
     GinTonic = 2,
-    FlyingHirsch = 3,
+
+    //FlyingHirsch = 3,
+    Manhatten = 3,
+
     TequilaSunrise = 4,
     Caipirinha = 5,
     Mojito = 6,
@@ -17,7 +20,6 @@ public enum DrinkType
     CubraLibre = 10,
     Magarita = 11,
     Daiquiri = 12
-    //Manhatten = 13
 }
 
 public class Drink : DrinkComparer

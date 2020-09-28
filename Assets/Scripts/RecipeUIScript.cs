@@ -30,12 +30,6 @@ public class RecipeUIScript : MonoBehaviour
         buttons = drinkHolder.GetComponentsInChildren<Button>(true);
         drink = new Drink();
         UpdateDrinks();
-
-        SelectDrink(1);
-        SelectDrink(2);
-        SelectDrink(3);
-        SelectDrink(4);
-        SelectDrink(5);
     }
 
     private void UpdateDrinks()
@@ -71,14 +65,7 @@ public class RecipeUIScript : MonoBehaviour
 
     public void toggleUIPanels()
     {
-        //Debug.Log(drinkHolder.gameObject.activeSelf + "drinkHolder");
-        //drinkHolder.gameObject.SetActive(!drinkHolder.gameObject.activeSelf);
-        //Debug.Log(drinkHolder.gameObject.activeSelf + "drinkHolder");
-        //Debug.Log(drinkIngredients.gameObject.activeSelf + "drinkIngredients");
-        //drinkIngredients.gameObject.SetActive(!drinkIngredients.gameObject.activeSelf);
-        //Debug.Log(drinkIngredients.gameObject.activeSelf + "drinkIngredients");
-
-        drinkHolder.gameObject.SetActive(false);
-        drinRecipe.gameObject.SetActive(true);
+        drinkHolder.gameObject.SetActive(drinkHolder.gameObject.activeSelf ? false : true);
+        drinRecipe.gameObject.SetActive(drinRecipe.gameObject.activeSelf ? false : true);
     }
 }

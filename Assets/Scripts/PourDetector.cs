@@ -19,9 +19,8 @@ public class PourDetector : MonoBehaviour
     public float fillAmountClampEmpty;
     private Material liquidMaterialReference;
     private Renderer liquidRendererReference;
-    
+
     private bool isPouring = false;
-    private Stream currentSteam = null;
 
     public ParticleSystem particleSystem;
     public LiquidType liqourType;
@@ -38,7 +37,7 @@ public class PourDetector : MonoBehaviour
         collisionEvents = new List<ParticleCollisionEvent>();
         liquidRendererReference = GetComponentInChildren<Wobble>().gameObject.GetComponent<Renderer>();
         liquidMaterialReference = liquidRendererReference.material;
-        
+
         GameObject shakerOBJ = GameObject.Find("Shaker");
         shaker = shakerOBJ.GetComponent<Shaker>();
         nozzleColider = shakerOBJ.transform.Find("Nozzle").GetComponent<MeshCollider>();
@@ -69,32 +68,20 @@ public class PourDetector : MonoBehaviour
 
     private void StartPour()
     {
-        //print("Start");
-        //currentSteam = CreateStream();
-        //currentSteam.Begin();
         particleSystem.Play();
         volumeControll = StartCoroutine(VolumeControll());
     }
 
     private void EndPour()
     {
-        //print("End");
         StopCoroutine(volumeControll);
         particleSystem.Stop();
-        //currentSteam.End();
-        //currentSteam = null;
     }
 
     private float CalculatePourAngle()
     {
         return transform.up.y * Mathf.Rad2Deg;
     }
-
-    //private Stream CreateStream()
-    //{
-    //    GameObject streamObject = Instantiate(streamPrefab, origin.position, Quaternion.identity, transform);
-    //    return streamObject.GetComponent<Stream>();
-    //}
 
     private IEnumerator VolumeControll()
     {
@@ -110,7 +97,7 @@ public class PourDetector : MonoBehaviour
             {
                 volume--;
             }
-            liquidMaterialReference.SetFloat(FillAmount, Mathf.Lerp(fillAmountClampEmpty, fillAmountClampFull, volume/1000f));
+            liquidMaterialReference.SetFloat(FillAmount, Mathf.Lerp(fillAmountClampEmpty, fillAmountClampFull, volume / 1000f));
             yield return null;
         }
     }
@@ -121,7 +108,7 @@ public class PourDetector : MonoBehaviour
         {
             this.volume++;
             liquidRendererReference.enabled = true;
-            liquidMaterialReference.SetFloat(FillAmount, Mathf.Lerp(fillAmountClampEmpty, fillAmountClampFull, volume/1000f));
+            liquidMaterialReference.SetFloat(FillAmount, Mathf.Lerp(fillAmountClampEmpty, fillAmountClampFull, volume / 1000f));
         }
     }
 
@@ -143,38 +130,12 @@ public class PourDetector : MonoBehaviour
 
         while (i < numCollisionEvents)
         {
-            //Debug.Log("Particle Collision: " + other.name);
-            //Debug.Log("Coll Event " + collisionEvents[i].colliderComponent.name);
             if (collisionEvents[i].colliderComponent.name == "Nozzle")
             {
-                Debug.Log("Attached OBJ " + other.name);
-                //Shaker shaker = other.GetComponentInParent<Shaker>();
+                //Debug.Log("Attached OBJ " + other.name);
                 shaker.addIngredient(new LiquidIngredient(liqourType), 1);
             }
             i++;
         }
     }
-
-    //private void OnParticleTrigger()
-    //{
-    //    List<ParticleSystem.Particle> enteredParticles = new List<ParticleSystem.Particle>();
-    //    // get
-    //    int numEnter = particleSystem.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enteredParticles);
-    //    // iterate
-
-    //    foreach (ParticleSystem.Particle particle in enteredParticles)
-    //    {
-    //        if (nozzleColider.bounds.Contains(particle.position))
-    //        {
-    //            Debug.Log("Particle collision mit nozzle");
-    //        }
-    //        else
-    //        {
-    //            Debug.Log("Particle collision mit was anderem");
-    //        }
-    //        // shaker.addIngredient(new LiquidIngredient(liqourType), 1);
-    //    }
-
-    //    ParticlePhysicsExtensions.GetTriggerParticles(particleSystem, ParticleSystemTriggerEventType.Enter, enteredParticles);
-    //}
 }

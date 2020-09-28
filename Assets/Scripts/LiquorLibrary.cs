@@ -87,14 +87,28 @@ public class LiquorLibrary : MonoBehaviour
              Pairing.Of(LiquidType.SimpleSyrup, 15)
          );
 
-        //addRecipe(DrinkType.Manhatten,
-        //    Pairing.Of(SolidType.Cherry, 1),
-        //    Pairing.Of(LiquidType.Whiskey, 40),
-        //    Pairing.Of(LiquidType.Vermouth, 20),
-        //    Pairing.Of(LiquidType.Angostura, 20)
-        //);
+        addRecipe(DrinkType.RumAndCoke,
+            Pairing.Of(SolidType.Ice, 1),
+            Pairing.Of(LiquidType.Cola, 12),
+            Pairing.Of(LiquidType.Rum, 5),
+            Pairing.Of(LiquidType.LimeJuice, 2)
+         );
 
-        //print();
+        addRecipe(DrinkType.GinTonic,
+            Pairing.Of(SolidType.Ice, 1),
+            Pairing.Of(SolidType.Lime, 1),
+            Pairing.Of(LiquidType.Gin, 4),
+            Pairing.Of(LiquidType.TonicWater, 25)
+        );
+
+        addRecipe(DrinkType.Manhatten,
+            Pairing.Of(SolidType.Cherry, 1),
+            Pairing.Of(LiquidType.Whiskey, 40),
+            Pairing.Of(LiquidType.Vermouth, 20),
+            Pairing.Of(LiquidType.Angostura, 20)
+        );
+
+        print();
     }
 
     public static DrinkType discoverDrinkType(Drink drinkToDiscover)
