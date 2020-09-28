@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using EzySlice;
@@ -29,7 +29,7 @@ public class Slicable : MonoBehaviour
         {
             return;
         }
-
+        other.GetContact(0).otherCollider.gameObject.GetComponentInParent<AudioSource>().Play();
         slicedObjects = this.gameObject.SliceInstantiate(other.transform.position, other.transform.forward, mat);
         if (slicedObjects != null)
         {
