@@ -18,11 +18,6 @@ public class SubmissionPad : MonoBehaviour
 
     private Image panelImage;
     private RectTransform cooldownRect;
-    private Color lerpedColor;
-    public Color successColor;
-    public Color failureColor;
-    public Color lerp1;
-    public Color lerp2;
 
     public Material pendingMaterial;
     public Material cooldownMaterial;
