@@ -153,6 +153,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   interactable: {fileID: 0}
+--- !u!114 &7297496147210747749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6329403964542715335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eafeedc99d9c8104a917a109d9ac63ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  solidType: 2
 --- !u!1001 &6329403964542747495
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -166,15 +179,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7654cc9cfdc93c94597684897a8cc77b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2.0518
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7654cc9cfdc93c94597684897a8cc77b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.0359
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7654cc9cfdc93c94597684897a8cc77b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -7.183
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7654cc9cfdc93c94597684897a8cc77b, type: 3}
       propertyPath: m_LocalRotation.x
