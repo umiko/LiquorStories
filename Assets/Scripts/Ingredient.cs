@@ -13,13 +13,13 @@ public abstract class Ingredient
 
 public enum SolidType
 {
-    Ice,
-    LemonSlice,
-    Mint,
-    Lime,
-    Sugar,
-    Cherry,
-    OrangeSlice
+    Ice = 0,
+    LemonSlice = 1,
+    Lime = 2,
+    Sugar = 3,
+    OrangeSlice = 4,
+    Cherry = 5,
+    Mint = 6,
 }
 
 public enum LiquidType
