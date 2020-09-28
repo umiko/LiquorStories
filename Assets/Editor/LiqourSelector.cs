@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(PourDetector))]
-public class LiqourSelector : Editor
+public class LiqourSelector : UnityEditor.Editor
 {
     private LiquidType liqour;
     private int liqourIndex = 0;
