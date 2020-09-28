@@ -53,10 +53,10 @@ public class Drink : DrinkComparer
 
     public override string ToString()
     {
-        string output = "" + type;
+        string output = "";
         foreach (KeyValuePair<Ingredient, int> entry in ingredienstDic.Ingrediens)
         {
-            output += "\n" + entry.Key.Type + " " + entry.Value;
+            output +=  entry.Key.Type + " " + entry.Value + "\n";
         }
         return output;
     }
