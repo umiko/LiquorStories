@@ -99,6 +99,19 @@ MonoBehaviour:
   highlightOnHover: 1
   hideHighlight: []
   hoverPriority: 0
+--- !u!114 &996680208176271852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4058051354669088395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eafeedc99d9c8104a917a109d9ac63ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  solidType: 1
 --- !u!114 &6876614327075760980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,19 +166,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   interactable: {fileID: 0}
---- !u!114 &996680208176271852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4058051354669088395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eafeedc99d9c8104a917a109d9ac63ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  solidType: 1
 --- !u!1001 &4058051354668988459
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -176,6 +176,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: ee6a0f4f3c9c1e245ba88d5f363c7424, type: 3}
       propertyPath: m_Name
       value: lemonCuttable
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ee6a0f4f3c9c1e245ba88d5f363c7424, type: 3}
+      propertyPath: m_TagString
+      value: SolidIngredient
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ee6a0f4f3c9c1e245ba88d5f363c7424, type: 3}
       propertyPath: m_LocalPosition.x

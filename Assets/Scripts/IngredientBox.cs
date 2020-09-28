@@ -5,43 +5,47 @@ using UnityEngine;
 
 public class IngredientBox : MonoBehaviour
 {
-    public SolidType solidType;
     public GameObject[] ingredients;
-    private GameObject objToSpawn;
     public int spawnNum = 2;
+    private Queue<GameObject> queue = new Queue<GameObject>();
 
     // Start is called before the first frame update
     private void Start()
     {
-        objToSpawn = ingredients[(int)solidType];
-        StartCoroutine("spawnNewIngredient");
+        StartCoroutine(nameof(SpawnNewIngredient));
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "SolidIngredient")
+        if (other.gameObject.CompareTag("SolidIngredient"))
         {
-            spawnNum = 1;
-            StartCoroutine("spawnNewIngredient");
-            Destroy(other.gameObject, 20f);
+            StartCoroutine(nameof(RespawnIngredient));
+            Destroy(other.gameObject, 180f);
+        }
+    }
+    
+    private IEnumerator RespawnIngredient()
+    {
+        for (int i = 0; i < spawnNum; i++)
+        {
+            foreach (GameObject ingredient in queue)
+            {
+                yield return new WaitForSeconds(3f);
+                Instantiate(ingredient, transform.position + new Vector3(0, 0.2f, 0), Quaternion.identity);
+                yield return new WaitForSeconds(.3f);
+            }
         }
     }
 
-    private IEnumerator spawnNewIngredient()
+    private IEnumerator SpawnNewIngredient()
     {
-        if (objToSpawn)
+        for (int i = 0; i < spawnNum; i++)
         {
-            for (int i = 0; i < spawnNum; i++)
+            foreach (GameObject ingredient in ingredients)
             {
-                Debug.Log(transform.position);
-                Instantiate(objToSpawn, transform.position + new Vector3(0, 0.2f, 0), Quaternion.identity);
-                yield return new WaitForSeconds(0.1f);
+                Instantiate(ingredient, transform.position + new Vector3(0, 0.2f, 0), Quaternion.identity);
+                yield return new WaitForSeconds(0.3f);
             }
-        }
-        else
-        {
-            Debug.LogError("IngredientBox could not find Ingredient");
-            yield return null;
         }
     }
 }
