@@ -7,6 +7,8 @@ TagManager:
   - Sharp
   - Refill Area
   - IceCube
+  - Shard
+  - SolidIngredient
   layers:
   - Default
   - TransparentFX
