@@ -25879,6 +25879,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shaker
       objectReference: {fileID: 0}
+    - target: {fileID: 6712836400786803866, guid: 8fd80c83718b5b849a5652196379302f,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6712836400786803867, guid: 8fd80c83718b5b849a5652196379302f,
         type: 3}
       propertyPath: m_LocalPosition.x
