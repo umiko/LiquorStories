@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Sharp
   - Refill Area
+  - IceCube
   layers:
   - Default
   - TransparentFX

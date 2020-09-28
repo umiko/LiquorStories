@@ -108,7 +108,7 @@ public class LiquorLibrary : MonoBehaviour
             Pairing.Of(LiquidType.Angostura, 20)
         );
 
-        print();
+        //print();
     }
 
     public static DrinkType discoverDrinkType(Drink drinkToDiscover)

@@ -45,21 +45,14 @@ public class SubmissionPad : MonoBehaviour
         cooldownPanel = padUI.transform.Find("CooldownPanel").gameObject;
 
         matRenderer = transform.Find("Trigger").GetComponent<Renderer>();
-        //matRenderer.material = successMaterial;
 
         panelImage = orderPanel.GetComponent<Image>();
         cooldownRect = cooldownPanel.transform.GetChild(0).GetComponent<RectTransform>();
-        //panelImage.color = Color.magenta;
 
         random = new System.Random();
         random.Next(0, 10);
         order = new Order(DrinkType.Default);
         StartCoroutine("Cooldown");
-        //newOrder();
-        //Debug.Log("jojoj");
-        //order.DrinkTypeOrdered = DrinkType.Caipirinha;
-        //order.Status = Status.Pending;
-        //updateUI(pendingMaterial, order);
     }
 
     private void Update()
@@ -72,7 +65,7 @@ public class SubmissionPad : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log(other.name);
+        //Debug.Log(other.name);
         if (other.gameObject.name == "Shaker_Mesh")
         {
             shaker = other.GetComponentInParent<Shaker>();
