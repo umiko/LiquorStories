@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: ddb4480f02371474284fe5e90796703e
+guid: fdac99ff788c8b8469c4119b922528b4
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Props Material.002
+    second: {fileID: 2100000, guid: 6b2240503da2ee04988262c79eadf2de, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
