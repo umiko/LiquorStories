@@ -42,11 +42,11 @@ public class Shaker : MonoBehaviour
 
         shakerUI = gameObject.GetComponentInChildren<ShakerUI>();
 
-        addIngredient(new SolidIngredient(SolidType.Ice), 1);
-        addIngredient(new SolidIngredient(SolidType.Lime), 1);
-        addIngredient(new SolidIngredient(SolidType.Sugar), 2);
-        addIngredient(new SolidIngredient(SolidType.Sugar), 1);
-        addIngredient(new LiquidIngredient(LiquidType.Cachaca), 50);
+        //addIngredient(new SolidIngredient(SolidType.Ice), 1);
+        //addIngredient(new SolidIngredient(SolidType.Lime), 1);
+        //addIngredient(new SolidIngredient(SolidType.Sugar), 2);
+        //addIngredient(new SolidIngredient(SolidType.Sugar), 1);
+        //addIngredient(new LiquidIngredient(LiquidType.Cachaca), 50);
     }
 
     public void addIngredient(Ingredient ingredient, int quantity)
