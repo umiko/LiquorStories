@@ -7,7 +7,7 @@ public class IngredientBox : MonoBehaviour
 {
     public GameObject[] ingredients;
     public int spawnNum = 2;
-    private Queue<GameObject> queue = new Queue<GameObject>();
+    private Queue<SolidType> queue = new Queue<SolidType>();
 
     // Start is called before the first frame update
     private void Start()
@@ -19,6 +19,7 @@ public class IngredientBox : MonoBehaviour
     {
         if (other.gameObject.CompareTag("SolidIngredient"))
         {
+            queue.Enqueue(other.GetComponent<IngredientObj>().solidType);
             StartCoroutine(nameof(RespawnIngredient));
             Destroy(other.gameObject, 180f);
         }
@@ -26,13 +27,14 @@ public class IngredientBox : MonoBehaviour
     
     private IEnumerator RespawnIngredient()
     {
-        for (int i = 0; i < spawnNum; i++)
+        SolidType type = queue.Dequeue();
+        foreach (GameObject ingredient in ingredients)
         {
-            foreach (GameObject ingredient in queue)
+            
+            if (ingredient.GetComponent<IngredientObj>().solidType == type)
             {
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(10f);
                 Instantiate(ingredient, transform.position + new Vector3(0, 0.2f, 0), Quaternion.identity);
-                yield return new WaitForSeconds(.3f);
             }
         }
     }

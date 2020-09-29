@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7690760637478344475}
   m_Layer: 0
   m_Name: Ing_Cherry
-  m_TagString: Untagged
+  m_TagString: SolidIngredient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,9 +30,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7384350726223899204}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0.824, y: 1.1942, z: 1.0619198}
-  m_LocalScale: {x: 0.04, y: 0.039999988, z: 0.039999988}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.01961685, y: 0.01961685, z: 0.01961685}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0

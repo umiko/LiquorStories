@@ -11,14 +11,14 @@ GameObject:
   - component: {fileID: 1453274768175796264}
   - component: {fileID: 2559392756705730445}
   - component: {fileID: 315319520903818055}
-  - component: {fileID: 1414597364187232198}
   - component: {fileID: 1414597364187232197}
   - component: {fileID: 1414597364187232201}
   - component: {fileID: 1414597364187232200}
   - component: {fileID: 1414597364187232199}
+  - component: {fileID: 7271966195848177318}
   m_Layer: 0
   m_Name: Ing_Mint
-  m_TagString: Untagged
+  m_TagString: SolidIngredient
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,8 +30,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2261019352710531730}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0.498, y: 1.469, z: 0.919}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.04, y: 0.04, z: 0.04}
   m_Children: []
   m_Father: {fileID: 0}
@@ -44,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2261019352710531730}
-  m_Mesh: {fileID: 6416302070336371891, guid: ff1c269d9bbc2a24191af1d8fd090a01, type: 3}
+  m_Mesh: {fileID: 6416302070336371891, guid: 0ad2b3895ae594d44a46a636a132e011, type: 3}
 --- !u!23 &315319520903818055
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -84,20 +84,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &1414597364187232198
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2261019352710531730}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6416302070336371891, guid: ff1c269d9bbc2a24191af1d8fd090a01, type: 3}
 --- !u!114 &1414597364187232197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,3 +219,17 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   interactable: {fileID: 0}
+--- !u!136 &7271966195848177318
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2261019352710531730}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.55349874
+  m_Height: 1.714819
+  m_Direction: 1
+  m_Center: {x: 0.046213537, y: 0.032039285, z: -0.014176074}
