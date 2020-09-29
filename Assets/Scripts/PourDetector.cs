@@ -107,6 +107,7 @@ public class PourDetector : MonoBehaviour
         if (other.gameObject.tag.Equals("Refill Area") && volume < maxVolume)
         {
             this.volume++;
+            isEmpty = false;
             liquidRendererReference.enabled = true;
             liquidMaterialReference.SetFloat(FillAmount, Mathf.Lerp(fillAmountClampEmpty, fillAmountClampFull, volume / 1000f));
         }
