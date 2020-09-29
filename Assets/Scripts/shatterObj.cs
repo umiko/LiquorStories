@@ -6,7 +6,6 @@ public class shatterObj : MonoBehaviour
 {
     public GameObject breakVersion;
     public float breakForce;
-    private int active = 0;
     public float radius;
     public AnimationCurve expoPower;
     public AudioClip clip;
@@ -19,17 +18,14 @@ public class shatterObj : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag != "Shard")
+        if (!collision.gameObject.CompareTag("Shard"))
         {
             //Debug.Log(gameObject.name + " velocity: " + rigidbody.velocity.magnitude + " relative: " + collision.relativeVelocity.magnitude);
             //if (rigidbody.velocity.magnitude > breakForce && active == 0)
-            if (collision.relativeVelocity.magnitude > breakForce && active == 0)
+            if (collision.relativeVelocity.magnitude > breakForce)
             {
                 //Debug.Log(gameObject.name + ": " + rigidbody.velocity.magnitude + " " + expoPower.Evaluate(rigidbody.velocity.magnitude));
                 //Debug.Log("ExPower: " + expoPower.Evaluate(rigidbody.velocity.magnitude));
-
-                active++;
-
                 AudioSource.PlayClipAtPoint(clip, transform.position, volume);
                 GameObject instance = Instantiate(breakVersion, transform.position, transform.rotation);
                 instance.transform.localScale = transform.localScale;
@@ -57,6 +53,11 @@ public class shatterObj : MonoBehaviour
                 //        rb.AddExplosionForce(expoPower.Evaluate(rigidbody.velocity.magnitude), explosionPos, radius, 0.0F, ForceMode.Impulse);
                 //    }
                 //}
+                if (gameObject.GetComponent<PourDetector>())
+                {
+                    gameObject.GetComponentInParent<PourableInitializer>().Respawn();
+                    return;
+                }
                 Destroy(gameObject);
             }
         }

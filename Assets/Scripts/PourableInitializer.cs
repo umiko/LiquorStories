@@ -6,8 +6,8 @@ using UnityEngine;
 public class PourableInitializer : MonoBehaviour
 {
     // Start is called before the first frame update
-    
-    
+    public Vector3 position, orientation;
+    private PourDetector pd;
     void Start()
     {
         /*
@@ -16,7 +16,7 @@ public class PourableInitializer : MonoBehaviour
         Set Liquid Color
         */
 
-        PourDetector pd = GetComponent<PourDetector>();
+        pd = GetComponent<PourDetector>();
         LiquidType contents = pd.liqourType;
         TextMeshPro[] labels = GetComponentsInChildren<TextMeshPro>();
         foreach (TextMeshPro textMeshPro in labels)
@@ -31,11 +31,17 @@ public class PourableInitializer : MonoBehaviour
         liquidRenderer.material.SetColor("_FoamColor", liquidColor + new Color(0.1f,0.1f,0.1f, 1 ));
         var particleSystemMainModule = GetComponent<ParticleSystem>().main;
         particleSystemMainModule.startColor = liquidColor;
+        position = transform.position;
+        orientation = transform.rotation.eulerAngles;
     }
 
     // Update is called once per frame
-    void Update()
+    public void Respawn()
     {
-        
+        transform.position = position;
+        transform.rotation = Quaternion.Euler(orientation);
+        gameObject.GetComponent<Rigidbody>().velocity=Vector3.zero;
+        gameObject.GetComponent<Rigidbody>().angularVelocity=Vector3.zero;
+        pd.volume = 0;
     }
 }
