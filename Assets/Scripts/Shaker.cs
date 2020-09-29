@@ -45,7 +45,6 @@ public class Shaker : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         mainCamera = Camera.main;
-        //liquorLibrary = new LiquorLibrary();
         IngredientComparer<Ingredient> ingredientComparer = new IngredientComparer<Ingredient>();
         ingredients = new Dictionary<Ingredient, int>(ingredientComparer);
         progressbar = shakerUI.gameObject.GetComponentInChildren<ProgressBar>();
@@ -55,11 +54,6 @@ public class Shaker : MonoBehaviour
         addIngredient(new SolidIngredient(SolidType.Sugar), 2);
         //addIngredient(new SolidIngredient(SolidType.Sugar), 1);
         addIngredient(new LiquidIngredient(LiquidType.Cachaca), 50);
-
-        //mixDrink()
-        //AddUItext("adawd");
-        //AddUItext("adwad");
-        //AddUItext("adhghhwerr");
     }
 
     public void AddUItext(Ingredient ingredient, int quantity)
@@ -115,12 +109,9 @@ public class Shaker : MonoBehaviour
 
     public void mixDrink()
     {
-        //Debug.Log("MixDrink");
         // Search for a Recepie for the ingredients added
-        //Drink newDrink = new Drink(DrinkType.Default, ingrediens);
         Drink = new Drink(DrinkType.Default, ingredients);
 
-        //LiquorLibrary.discoverDrinkType(newDrink);
         // return the Drink if it exists or default Drink
         DrinkType drinkType = LiquorLibrary.discoverDrinkType(Drink);
         Drink.type = drinkType;
@@ -194,7 +185,11 @@ public class Shaker : MonoBehaviour
         IsDrinkMixed = false;
         ingredients.Clear();
         ingredients_txt.Clear();
-        Drink.type = DrinkType.Default;
+        if (Drink != null)
+        {
+            Drink.type = DrinkType.Default;
+        }
+
         progressbar.Reset();
         ClearUIText();
         //...
