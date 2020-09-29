@@ -77,6 +77,8 @@ public class SubmissionPad : MonoBehaviour
                     {
                         updateUI(failureMaterial, order.DrinkTypeOrdered, Status.Failure);
                     }
+
+                    shaker.emptyShaker();
                     StartCoroutine(nameof(ResetPad));
                 }
                 else
