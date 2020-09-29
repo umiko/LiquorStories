@@ -23,7 +23,7 @@ public class ShakerUI : MonoBehaviour
 
     public void AddUIElement(Ingredient ingredient, int quantity)
     {
-        tmpUIElement = Instantiate(uiTemplate, transform.position, Quaternion.identity);
+        tmpUIElement = Instantiate(uiTemplate, transform.position, contentBody.transform.rotation);
         tmpUIElement.name = ingredient.Type.ToString();
         tmpUIElement.transform.SetParent(contentBody.transform);
 
