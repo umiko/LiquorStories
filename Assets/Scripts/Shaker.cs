@@ -33,6 +33,7 @@ public class Shaker : MonoBehaviour
     public bool IsDrinkMixed { get => isDrinkMixed; set => isDrinkMixed = value; }
 
     private ShakerUI shakerUI;
+    private Camera mainCamera;
 
     private void Start()
     {
@@ -40,6 +41,7 @@ public class Shaker : MonoBehaviour
         IngredientComparer<Ingredient> ingredientComparer = new IngredientComparer<Ingredient>();
         ingredients = new Dictionary<Ingredient, int>(ingredientComparer);
 
+        mainCamera = Camera.main;
         shakerUI = gameObject.GetComponentInChildren<ShakerUI>();
 
         //addIngredient(new SolidIngredient(SolidType.Ice), 1);
@@ -89,6 +91,11 @@ public class Shaker : MonoBehaviour
     private void Update()
     {
         //shakerUI.transform.rotation = mainCamera.transform.rotation; // ist eher störend
+        if (mainCamera)
+        {
+            shakerUI.transform.rotation = Quaternion.Euler(0, mainCamera.transform.rotation.y, 0);
+        }
+
         currentTime = Time.deltaTime;
 
         if (currentTime >= timeToWait)
