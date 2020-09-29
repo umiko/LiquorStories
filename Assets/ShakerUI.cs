@@ -48,6 +48,7 @@ public class ShakerUI : MonoBehaviour
 
     public void ClearUIText()
     {
+        uiElements.Clear();
         foreach (Transform child in contentBody.transform)
         {
             GameObject.Destroy(child.gameObject);
