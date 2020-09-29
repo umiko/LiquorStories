@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class SubmissionPad : MonoBehaviour
 {
@@ -28,7 +29,6 @@ public class SubmissionPad : MonoBehaviour
     private Shaker shaker;
 
     private Order order;
-    private System.Random random;
 
     public float rotateSpeed = 40;
 
@@ -44,8 +44,6 @@ public class SubmissionPad : MonoBehaviour
         panelImage = orderPanel.GetComponent<Image>();
         cooldownRect = cooldownPanel.transform.GetChild(0).GetComponent<RectTransform>();
 
-        random = new System.Random();
-        random.Next(0, 10);
         order = new Order(DrinkType.Default);
         StartCoroutine("Cooldown");
     }
@@ -77,7 +75,7 @@ public class SubmissionPad : MonoBehaviour
                     {
                         updateUI(failureMaterial, order.DrinkTypeOrdered, Status.Failure);
                     }
-                    StartCoroutine("ResetPad");
+                    StartCoroutine(nameof(ResetPad));
                 }
                 else
                 {
@@ -102,9 +100,9 @@ public class SubmissionPad : MonoBehaviour
     private void newOrder()
     {
         int drinkTypeCount = Enum.GetNames(typeof(DrinkType)).Length;
-        //order.DrinkTypeOrdered = (DrinkType)random.Next(1, drinkTypeCount);
+        order.DrinkTypeOrdered = (DrinkType)Random.Range(1, drinkTypeCount);
         //test
-        order.DrinkTypeOrdered = DrinkType.Caipirinha;
+        //order.DrinkTypeOrdered = DrinkType.Caipirinha;
         order.Status = Status.Pending;
 
         updateUI(pendingMaterial, order);
@@ -127,6 +125,6 @@ public class SubmissionPad : MonoBehaviour
     {
         yield return new WaitForSeconds(6f);
         shaker.emptyShaker();
-        StartCoroutine("Cooldown");
+        StartCoroutine(nameof(Cooldown));
     }
 }

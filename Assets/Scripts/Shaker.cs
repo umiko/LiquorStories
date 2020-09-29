@@ -10,7 +10,7 @@ using UnityEngine.UIElements;
 
 public class Shaker : MonoBehaviour
 {
-    private Dictionary<Ingredient, int> ingrediens;
+    private Dictionary<Ingredient, int> ingredients;
 
     public GameObject txtTemp = null;
     public GameObject content = null;
@@ -47,7 +47,7 @@ public class Shaker : MonoBehaviour
         mainCamera = Camera.main;
         //liquorLibrary = new LiquorLibrary();
         IngredientComparer<Ingredient> ingredientComparer = new IngredientComparer<Ingredient>();
-        ingrediens = new Dictionary<Ingredient, int>(ingredientComparer);
+        ingredients = new Dictionary<Ingredient, int>(ingredientComparer);
         progressbar = shakerUI.gameObject.GetComponentInChildren<ProgressBar>();
 
         addIngredient(new SolidIngredient(SolidType.Ice), 1);
@@ -56,8 +56,7 @@ public class Shaker : MonoBehaviour
         //addIngredient(new SolidIngredient(SolidType.Sugar), 1);
         addIngredient(new LiquidIngredient(LiquidType.Cachaca), 50);
 
-        //mixDrink();
-
+        //mixDrink()
         //AddUItext("adawd");
         //AddUItext("adwad");
         //AddUItext("adhghhwerr");
@@ -83,9 +82,16 @@ public class Shaker : MonoBehaviour
             if (child.name == ingredient.Type.ToString())
             {
                 //print("jo");
-                child.GetComponent<TMP_Text>().text = ingredient.Type + "\t\t" + ingrediens[ingredient];
+                child.GetComponent<TMP_Text>().text = ingredient.Type + "\t\t" + ingredients[ingredient];
                 child.GetComponent<TMP_Text>().text += ingredient is LiquidIngredient ? "ml" : "st";
             }
+        }
+    }
+
+    public void ClearUIText()
+    {
+        foreach (Transform child in content.transform) {
+            GameObject.Destroy(child.gameObject);
         }
     }
 
@@ -93,18 +99,18 @@ public class Shaker : MonoBehaviour
     {
         int value = 0;
 
-        if (ingrediens.TryGetValue(ingredient, out value)) // Fügt einem gespeicherten Ingredient etwas hinzu oder legt es an
+        if (ingredients.TryGetValue(ingredient, out value)) // Fügt einem gespeicherten Ingredient etwas hinzu oder legt es an
         {
-            ingrediens[ingredient] += quantity;
+            ingredients[ingredient] += quantity;
             UpdateUItext(ingredient);
         }
         else
         {
-            ingrediens.Add(ingredient, quantity);
+            ingredients.Add(ingredient, quantity);
             AddUItext(ingredient, quantity);
         }
 
-        Debug.Log(ingredient.Type + ": " + ingrediens[ingredient]);
+        Debug.Log(ingredient.Type + ": " + ingredients[ingredient]);
     }
 
     public void mixDrink()
@@ -112,7 +118,7 @@ public class Shaker : MonoBehaviour
         //Debug.Log("MixDrink");
         // Search for a Recepie for the ingredients added
         //Drink newDrink = new Drink(DrinkType.Default, ingrediens);
-        Drink = new Drink(DrinkType.Default, ingrediens);
+        Drink = new Drink(DrinkType.Default, ingredients);
 
         //LiquorLibrary.discoverDrinkType(newDrink);
         // return the Drink if it exists or default Drink
@@ -170,7 +176,7 @@ public class Shaker : MonoBehaviour
         {
             progressbar.progressText.text = "Put the Lid on";
         }
-        else if (ingrediens.Count == 0)
+        else if (ingredients.Count == 0)
         {
             progressbar.progressText.text = "Add more ingredients";
         }
@@ -186,9 +192,11 @@ public class Shaker : MonoBehaviour
     {
         //reset stuff
         IsDrinkMixed = false;
-        ingrediens.Clear();
+        ingredients.Clear();
+        ingredients_txt.Clear();
         Drink.type = DrinkType.Default;
         progressbar.Reset();
+        ClearUIText();
         //...
     }
 }

@@ -9,7 +9,7 @@ public enum Status
     Failure = 2
 }
 
-public class Order : MonoBehaviour
+public class Order 
 {
     public DrinkType DrinkTypeOrdered { get; set; }
     public Status Status { get; set; }
