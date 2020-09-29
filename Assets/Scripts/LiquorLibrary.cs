@@ -62,7 +62,7 @@ public class LiquorLibrary : MonoBehaviour
            Pairing.Of(LiquidType.Cream, 10)
        );
 
-        addRecipe(DrinkType.CubraLibre,
+        addRecipe(DrinkType.CubaLibre,
             Pairing.Of(SolidType.Ice, 1),
             Pairing.Of(SolidType.Lime, 1),
             Pairing.Of(LiquidType.Rum, 50),

@@ -17,7 +17,7 @@ public enum DrinkType
     LongIslandIcedTea = 7,
     Cosmopolitan = 8,
     PinaColada = 9,
-    CubraLibre = 10,
+    CubaLibre = 10,
     Magarita = 11,
     Daiquiri = 12
 }
