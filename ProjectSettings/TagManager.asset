@@ -9,6 +9,7 @@ TagManager:
   - IceCube
   - Shard
   - SolidIngredient
+  - ScoreBoard
   layers:
   - Default
   - TransparentFX

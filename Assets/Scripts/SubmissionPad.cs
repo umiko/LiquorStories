@@ -13,7 +13,8 @@ public class SubmissionPad : MonoBehaviour
     private Canvas padUI;
     private GameObject orderPanel;
     private GameObject cooldownPanel;
-
+    private IncrementScore scoreBoard;
+    
     public TextMeshProUGUI orderText;
     public TextMeshProUGUI statusText;
 
@@ -38,7 +39,7 @@ public class SubmissionPad : MonoBehaviour
         padUI = gameObject.GetComponentInChildren<Canvas>();
         orderPanel = padUI.transform.Find("OrderPanel").gameObject;
         cooldownPanel = padUI.transform.Find("CooldownPanel").gameObject;
-
+        scoreBoard = GameObject.FindWithTag("ScoreBoard").GetComponent<IncrementScore>();
         matRenderer = transform.Find("Trigger").GetComponent<Renderer>();
 
         panelImage = orderPanel.GetComponent<Image>();
@@ -70,6 +71,7 @@ public class SubmissionPad : MonoBehaviour
                     if (order.DrinkTypeOrdered == shaker.Drink.type)
                     {
                         updateUI(successMaterial, order.DrinkTypeOrdered, Status.Success);
+                        scoreBoard.Increment();
                     }
                     else
                     {
@@ -90,6 +92,7 @@ public class SubmissionPad : MonoBehaviour
         matRenderer.material = material;
         orderText.text = drinkType.ToString();
         statusText.text = status.ToString();
+        
     }
 
     private void updateUI(Material material, Order order)
