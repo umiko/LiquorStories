@@ -11,7 +11,7 @@ public class IngredientObj : MonoBehaviour
         if (collision.collider.name == "Nozzle")
         {
             collision.collider.transform.parent.GetComponent<Shaker>().addIngredient(new SolidIngredient(solidType), 1);
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 }

@@ -38,6 +38,7 @@ public class SliceCooldown : MonoBehaviour
         mySlicable = gameObject.AddComponent<Slicable>();
         mySlicable.Pieces = Pieces;
         mySlicable.mat = mat;
+        
         gameObject.AddComponent<Interactable>();
         Throwable t = gameObject.AddComponent<Throwable>();
         t.attachmentFlags = Hand.AttachmentFlags.DetachFromOtherHand | Hand.AttachmentFlags.VelocityMovement |

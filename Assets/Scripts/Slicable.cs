@@ -47,6 +47,8 @@ public class Slicable : MonoBehaviour
             rb.interpolation = RigidbodyInterpolation.Interpolate;
             MeshCollider col = obj.AddComponent<MeshCollider>();
             col.convex = true;
+            IngredientObj ingredientObj = obj.AddComponent<IngredientObj>();
+            ingredientObj.solidType = GetComponent<IngredientObj>().solidType;
             //SliceCooldown sc = obj.AddComponent<SliceCooldown>();
             SliceCooldown sli = obj.AddComponent<SliceCooldown>();
             sli.Pieces = Pieces - 1;
