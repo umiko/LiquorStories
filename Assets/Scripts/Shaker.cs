@@ -93,7 +93,8 @@ public class Shaker : MonoBehaviour
         //shakerUI.transform.rotation = mainCamera.transform.rotation; // ist eher störend
         if (mainCamera)
         {
-            shakerUI.transform.rotation = Quaternion.Euler(0, mainCamera.transform.rotation.y, 0);
+            // shakerUI.transform.rotation = Quaternion.Euler(0, mainCamera.transform.rotation.y, 0);
+            shakerUI.transform.rotation = Quaternion.Euler(0, mainCamera.transform.rotation.eulerAngles.y, 0);
         }
 
         currentTime = Time.deltaTime;
