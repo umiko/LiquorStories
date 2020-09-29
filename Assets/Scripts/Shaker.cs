@@ -11,21 +11,12 @@ using UnityEngine.UIElements;
 public class Shaker : MonoBehaviour
 {
     private Dictionary<Ingredient, int> ingredients;
-
-    public GameObject txtTemp = null;
-    public GameObject content = null;
-    public GameObject txtDrinkName = null;
     private List<GameObject> ingredients_txt = new List<GameObject>();
-
-    public Canvas shakerUI;
-    public RectTransform toolTipPanel;
-    private Camera mainCamera;
 
     public bool isCoverAttached;
     private Rigidbody rb;
-
-    private ProgressBar progressbar;
     private float currentTime;
+
     private float timeToWait = 0;
 
     private Drink drink;
@@ -41,52 +32,21 @@ public class Shaker : MonoBehaviour
 
     public bool IsDrinkMixed { get => isDrinkMixed; set => isDrinkMixed = value; }
 
+    private ShakerUI shakerUI;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        mainCamera = Camera.main;
         IngredientComparer<Ingredient> ingredientComparer = new IngredientComparer<Ingredient>();
         ingredients = new Dictionary<Ingredient, int>(ingredientComparer);
-        progressbar = shakerUI.gameObject.GetComponentInChildren<ProgressBar>();
+
+        shakerUI = gameObject.GetComponentInChildren<ShakerUI>();
 
         addIngredient(new SolidIngredient(SolidType.Ice), 1);
         addIngredient(new SolidIngredient(SolidType.Lime), 1);
         addIngredient(new SolidIngredient(SolidType.Sugar), 2);
-        //addIngredient(new SolidIngredient(SolidType.Sugar), 1);
+        addIngredient(new SolidIngredient(SolidType.Sugar), 1);
         addIngredient(new LiquidIngredient(LiquidType.Cachaca), 50);
-    }
-
-    public void AddUItext(Ingredient ingredient, int quantity)
-    {
-        GameObject tmp = Instantiate(txtTemp, content.transform.position, content.transform.rotation);
-        tmp.name = ingredient.Type.ToString();
-        tmp.transform.SetParent(content.transform);
-        tmp.GetComponent<TMP_Text>().text = ingredient.Type.ToString() + "\t\t" + quantity;
-        tmp.GetComponent<TMP_Text>().text += ingredient is LiquidIngredient ? "ml" : "st";
-
-        tmp.GetComponent<RectTransform>().localScale = Vector3.one;
-
-        ingredients_txt.Add(tmp);
-    }
-
-    public void UpdateUItext(Ingredient ingredient)
-    {
-        foreach (GameObject child in ingredients_txt)
-        {
-            if (child.name == ingredient.Type.ToString())
-            {
-                //print("jo");
-                child.GetComponent<TMP_Text>().text = ingredient.Type + "\t\t" + ingredients[ingredient];
-                child.GetComponent<TMP_Text>().text += ingredient is LiquidIngredient ? "ml" : "st";
-            }
-        }
-    }
-
-    public void ClearUIText()
-    {
-        foreach (Transform child in content.transform) {
-            GameObject.Destroy(child.gameObject);
-        }
     }
 
     public void addIngredient(Ingredient ingredient, int quantity)
@@ -96,15 +56,15 @@ public class Shaker : MonoBehaviour
         if (ingredients.TryGetValue(ingredient, out value)) // Fügt einem gespeicherten Ingredient etwas hinzu oder legt es an
         {
             ingredients[ingredient] += quantity;
-            UpdateUItext(ingredient);
+            shakerUI.UpdateUIText(ingredient);
         }
         else
         {
             ingredients.Add(ingredient, quantity);
-            AddUItext(ingredient, quantity);
+            shakerUI.AddUIElement(ingredient, quantity);
         }
 
-        Debug.Log(ingredient.Type + ": " + ingredients[ingredient]);
+        //Debug.Log(ingredient.Type + ": " + ingredients[ingredient]);
     }
 
     public void mixDrink()
@@ -115,28 +75,16 @@ public class Shaker : MonoBehaviour
         // return the Drink if it exists or default Drink
         DrinkType drinkType = LiquorLibrary.discoverDrinkType(Drink);
         Drink.type = drinkType;
-        if (drinkType != DrinkType.Default)
-        {
-            Debug.Log("Success: " + drinkType);
-        }
-        else
-        {
-            Debug.Log("Failure: " + drinkType);
-        }
+        //if (drinkType != DrinkType.Default)
+        //{
+        //    Debug.Log("Success: " + drinkType);
+        //}
+        //else
+        //{
+        //    Debug.Log("Failure: " + drinkType);
+        //}
         IsDrinkMixed = true;
     }
-
-    //private void OnGUI()
-    //{
-    //    GUI.Button(new Rect(0, 0, 100, 20), new GUIContent("A Button", "This is the tooltip"));
-    //    // If the user hovers the mouse over the button, the global tooltip gets set
-    //    GUI.Label(new Rect(0, 40, 100, 40), GUI.tooltip);
-    //}
-
-    //public void toggleToolTip()
-    //{
-    //    toolTipPanel.gameObject.SetActive(toolTipPanel.gameObject.activeSelf ? false : true);
-    //}
 
     private void Update()
     {
@@ -147,17 +95,16 @@ public class Shaker : MonoBehaviour
         {
             shakeDetection();
             timeToWait += 0.15f;
-            //Debug.Log("Jetzt");
         }
         else
         {
             timeToWait -= currentTime;
         }
 
-        if (progressbar.IsComplete && !IsDrinkMixed)
+        if (shakerUI.progressbar.IsComplete && !IsDrinkMixed)
         {
             mixDrink();
-            progressbar.progressText.text = Drink.type.ToString();
+            shakerUI.progressbar.progressText.text = Drink.type.ToString();
         }
     }
 
@@ -165,17 +112,17 @@ public class Shaker : MonoBehaviour
     {
         if (!isCoverAttached)
         {
-            progressbar.progressText.text = "Put the Lid on";
+            shakerUI.progressbar.progressText.text = "Put the Lid on";
         }
         else if (ingredients.Count == 0)
         {
-            progressbar.progressText.text = "Add more ingredients";
+            shakerUI.progressbar.progressText.text = "Add more ingredients";
         }
         else if (rb.velocity.magnitude >= 1)
         {
             float progress = 0.05f;
             //Debug.Log("Shaker velocity" + rb.velocity.magnitude + "  Pr: " + progress);
-            progressbar.IncrementProgress(progress);
+            shakerUI.progressbar.IncrementProgress(progress);
         }
     }
 
@@ -190,8 +137,13 @@ public class Shaker : MonoBehaviour
             Drink.type = DrinkType.Default;
         }
 
-        progressbar.Reset();
-        ClearUIText();
+        shakerUI.progressbar.Reset();
+        shakerUI.ClearUIText();
         //...
+    }
+
+    public int GetIngredientAmount(Ingredient ingredient)
+    {
+        return ingredients[ingredient];
     }
 }
